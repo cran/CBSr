@@ -1,0 +1,1 @@
+This is the original source code for java function CBScalc that calculates yhat from x.

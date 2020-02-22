@@ -1,0 +1,8 @@
+\documentclass{article}
+\usepackage{pdfpages}
+%\VignetteIndexEntry{Lee, Glaze, Bradlow, Kable CBS}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\includepdf[pages=-, fitpaper=true]{CBS_Manuscript.pdf}
+\end{document}
