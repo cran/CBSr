@@ -43,3 +43,24 @@ Option 1 is receiving \code{Amt1} in \code{Delay1} and Option 2 is receiving \co
 One of the two options may be immediate (i.e., delay = 0; e.g., $40 in 20 days vs. $20 today).
 \code{choice} should be 1 if option 1 is chosen, 0 if option 2 is chosen.
 }
+\examples{
+# Fit example ITC data with 2-piece CBS function.
+# Load example data (included with package).
+# Each row is a choice between option 1 (Amt at Delay) vs option 2 (20 now).
+Amount1 = ITCdat$Amt1
+Delay1 = ITCdat$Delay1
+Amount2 = 20
+Delay2 = 0
+Choice = ITCdat$Choice
+
+# Fit the model
+out = CBS_ITC(Choice,Amount1,Delay1,Amount2,Delay2,2)
+
+# Plot the choices (x = Delay, y = relative amount : 20 / delayed amount)
+plot(Delay1[Choice==1],20/Amount1[Choice==1],type = 'p',col="blue",xlim=c(0, 180), ylim=c(0, 1))
+points(Delay1[Choice==0],20/Amount1[Choice==0],type = 'p',col="red")
+
+# Plot the fitted CBS
+x = 0:out$normD
+lines(x,CBSfunc(out$xpos,out$ypos,x),col="black")
+}

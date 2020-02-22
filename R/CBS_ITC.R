@@ -25,6 +25,26 @@
 #'     \item \code{AUC}: area under the curve of the fitted CBS function. Normalized to be between 0 and 1.
 #'     \item \code{normD} : The domain of CBS function runs from 0 to \code{normD}. Specifically, this is the constant used to normalize all delays between 0 and 1, since CBS is fitted in a unit square first and then scaled up.
 #' }
+#' @examples
+#' # Fit example ITC data with 2-piece CBS function.
+#' # Load example data (included with package).
+#' # Each row is a choice between option 1 (Amt at Delay) vs option 2 (20 now).
+#' Amount1 = ITCdat$Amt1
+#' Delay1 = ITCdat$Delay1
+#' Amount2 = 20
+#' Delay2 = 0
+#' Choice = ITCdat$Choice
+#'
+#' # Fit the model
+#' out = CBS_ITC(Choice,Amount1,Delay1,Amount2,Delay2,2)
+#'
+#' # Plot the choices (x = Delay, y = relative amount : 20 / delayed amount)
+#' plot(Delay1[Choice==1],20/Amount1[Choice==1],type = 'p',col="blue",xlim=c(0, 180), ylim=c(0, 1))
+#' points(Delay1[Choice==0],20/Amount1[Choice==0],type = 'p',col="red")
+#'
+#' # Plot the fitted CBS
+#' x = 0:out$normD
+#' lines(x,CBSfunc(out$xpos,out$ypos,x),col="black")
 #' @export
 
 CBS_ITC <- function(choice,Amt1,Delay1,Amt2,Delay2,numpiece,numfit=NULL){
@@ -79,8 +99,8 @@ CBS_ITC <- function(choice,Amt1,Delay1,Amt2,Delay2,numpiece,numfit=NULL){
 #' @noRd
 
 ITCnegLL <- function(x,A1,V1,A2,V2,Ch,cutoff){
-  yhat1 <- CBSfunc(c(0,x[2:cutoff],1), c(1,x[(cutoff+1):length(x)],1), V1)
-  yhat2 <- CBSfunc(c(0,x[2:cutoff],1), c(1,x[(cutoff+1):length(x)],1), V2)
+  yhat1 <- CBSfunc(c(0,x[2:cutoff],1), c(1,x[(cutoff+1):length(x)]), V1)
+  yhat2 <- CBSfunc(c(0,x[2:cutoff],1), c(1,x[(cutoff+1):length(x)]), V2)
   return(negLL_logit(x[1],A1,yhat1,A2,yhat2,Ch))
 }
 

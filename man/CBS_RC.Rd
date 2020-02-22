@@ -30,7 +30,7 @@ A list containing the following:
     \item \code{scale}: scaling factor of the logit model
     \item \code{xpos}: x coordinates of the fitted CBS function
     \item \code{ypos}: y coordinates of the fitted CBS function
-    \item \code{AUC}: area under the curve of the fitted CBS function. Normalized to be between 0 and 1.=
+    \item \code{AUC}: area under the curve of the fitted CBS function. Normalized to be between 0 and 1.
 }
 }
 \description{
@@ -41,4 +41,25 @@ The input data has n choices (ideally n > 100) between two reward options.
 Option 1 is receiving \code{Amt1} with probability \code{Prob1} and Option 2 is receiving \code{Amt2} with probability \code{Prob2} (e.g., $40 with 53\% chance vs. $20 with 90\% chance).
 One of the two options may be certain (i.e., prob = 1; e.g., $40 with 53\% chance vs. $20 for sure).
 \code{choice} should be 1 if option 1 is chosen, 0 if option 2 is chosen.
+}
+\examples{
+# Fit example Risky choice data with 2-piece CBS function.
+# Load example data (included with package).
+# Each row is a choice between option 1 (Amt with prob) vs option 2 (20 for 100\%).
+Amount1 = RCdat$Amt1
+Prob1 = RCdat$Prob1
+Amount2 = 20
+Prob2 = 1
+Choice = RCdat$Choice
+
+# Fit the model
+out = CBS_RC(Choice,Amount1,Prob1,Amount2,Prob2,2)
+
+# Plot the choices (x = Delay, y = relative amount : 20 / risky amount)
+plot(Prob1[Choice==1],20/Amount1[Choice==1],type = 'p',col="blue",xlim=c(0, 1), ylim=c(0, 1))
+points(Prob1[Choice==0],20/Amount1[Choice==0],type = 'p',col="red")
+
+# Plot the fitted CBS
+x = seq(0,1,.01)
+lines(x,CBSfunc(out$xpos,out$ypos,x))
 }

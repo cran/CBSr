@@ -52,7 +52,7 @@ CBS_error <- function(choice,Amt1,Var1,Amt2,Var2,numpiece,numfit){
 #' Hence, until I figure out a better way to deal with it (or NlcOptim package is updated to be more robust), we just try a different starting point.
 #' From extensive testing on all data I have, it seems to happen once or twice every few hundred fittings.
 #' I also tried other optimization packages that support non-linear inequality AND equality constraints, but they were all much slower than NlcOptim, which is already slower than MATLAB's fmincon.
-#' Other developers, who want to see what errors I'm talking about, set the 'silent=TRUE' to FALSE in the try statement below.
+#' Other developers, who want to see what errors I'm talking about, set the 'silent=TRUE' to FALSE in the try statement below and run the CBS_RC example script.
 #' @noRd
 
 CBS_fitloop <- function(inputlist,startingpoints){
