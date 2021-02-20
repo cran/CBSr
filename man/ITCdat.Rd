@@ -4,12 +4,14 @@
 \name{ITCdat}
 \alias{ITCdat}
 \title{Sample participant data from a binary intertemporal choice task (aka delay discounting task)}
-\format{A data frame with 120 rows and 3 variables:
+\format{
+A data frame with 120 rows and 3 variables:
 \describe{
   \item{Amt1}{Delayed reward amount, in dollars}
   \item{Delay1}{Delay until the receipt of \code{Amt1}, in days}
   \item{Choice}{Choice between binary options. \code{Choice==1} means participnat chose the delayed option (i.e., \code{Amt1} in \code{Delay1} days). \code{Choice==0} means participnat chose the immediate option (i.e., $20 now)}
-}}
+}
+}
 \source{
 Kable, J. W., Caulfield, M. K., Falcone, M., McConnell, M., Bernardo, L., Parthasarathi, T., ... & Diefenbach, P. (2017). No effect of commercial cognitive training on brain activity, choice behavior, or cognitive performance. Journal of Neuroscience, 37(31), 7390-7402.
 }
